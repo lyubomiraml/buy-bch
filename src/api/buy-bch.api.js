@@ -17,6 +17,15 @@ export const getRate = async (bgnAmount) => {
   }
 };
 
+export const getLimits = async () => {
+  try {
+    const response = await axios.get(`${backendUrl}/limits`);
+    return response.data;
+  } catch (err) {
+    return { errorId: "bchapi.error.general" };
+  }
+};
+
 export const getOrder = async (orderId) => {
   try {
     const response = await axios.get(`${backendUrl}/order/${orderId}`);
@@ -26,12 +35,13 @@ export const getOrder = async (orderId) => {
   }
 };
 
-export const newOrder = async (bgnAmount, bchAddress, email) => {
+export const newOrder = async (bgnAmount, bchAddress, email, locale) => {
   try {
     const response = await axios.post(`${backendUrl}/order`, {
       bgn_amount: bgnAmount,
       bch_addr: bchAddress,
       email,
+      locale,
     });
     return { order: response.data };
   } catch (err) {

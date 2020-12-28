@@ -18,7 +18,7 @@ import "./photo-verification.styles.scss";
 function PhotoVerification({
   orderId,
   setOrder,
-  photoSuffix,
+  photoId,
   declarationFormUrl,
   setErrorMessage,
   setLoading,
@@ -36,7 +36,7 @@ function PhotoVerification({
     } else {
       setErrorMessage("");
       setLoading(true);
-      const response = await verifyPhoto(orderId, photo, photoSuffix);
+      const response = await verifyPhoto(orderId, photo, photoSuffix());
       setLoading(false);
       if (response.order) {
         setPhoto(null);
@@ -48,6 +48,13 @@ function PhotoVerification({
     }
   };
 
+  const photoSuffix = () => {
+    if (photoId === "declaration_form_1" || photoId === "declaration_form_2") {
+      return "declaration_form";
+    }
+    return photoId;
+  };
+
   const handleChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       let img = event.target.files[0];
@@ -56,12 +63,14 @@ function PhotoVerification({
   };
 
   const photoMessageId = () => {
-    if (photoSuffix === "id_photo") {
+    if (photoId === "id_photo") {
       return "photo.typeId";
-    } else if (photoSuffix === "face_photo") {
+    } else if (photoId === "face_photo") {
       return "photo.typeFace";
-    } else if (photoSuffix === "declaration_form") {
-      return "photo.typeDeclaration";
+    } else if (photoId === "declaration_form_1") {
+      return "photo.typeDeclaration1";
+    } else if (photoId === "declaration_form_2") {
+      return "photo.typeDeclaration2";
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import logo from "../../assets/assets_images_poype-logo-light.png";
 import { Context } from "../intl-wrapper/intl-wrapper.component";
@@ -7,26 +7,26 @@ import { useIntl } from "react-intl";
 
 import "./header.styles.scss";
 
-const options = {
-  bg: { value: "bg-BG", label: "БГ" },
-  en: { value: "en", label: "EN" },
+const languages = {
+  bg: "БГ",
+  en: "EN",
 };
 
 const Header = () => {
-  const setInitialState = () => {
-    return /^bg\b/.test(context.locale) ? options["bg"] : options["en"];
-  };
   const context = useContext(Context);
-  const [currentLanguage, setCurrentLanguage] = useState(setInitialState());
-
   const intl = useIntl();
 
   const toggleLanguage = () => {
-    const language =
-      currentLanguage.label === options["bg"].label ? "en" : "bg";
+    const language = context.locale === "bg" ? "en" : "bg";
+    setLanguage(language);
+  };
 
-    setCurrentLanguage(options[language]);
-    context.selectLanguage(options[language].value);
+  const setLanguage = (language) => {
+    context.selectLanguage(language);
+  };
+
+  const getLanguageClasses = (language) => {
+    return context.locale === language ? "option active" : "option";
   };
 
   return (
@@ -37,8 +37,22 @@ const Header = () => {
       <div className="powered-text">
         {intl.formatMessage({ id: "header.heading" })}
       </div>
-      <div className="language" onClick={() => toggleLanguage()}>
-        {currentLanguage.label}
+      <div className="language-phone" onClick={() => toggleLanguage()}>
+        {languages[context.locale]}
+      </div>
+      <div className="language-desktop">
+        <div
+          className={getLanguageClasses("en")}
+          onClick={() => setLanguage("en")}
+        >
+          {languages.en}
+        </div>
+        <div
+          className={getLanguageClasses("bg")}
+          onClick={() => setLanguage("bg")}
+        >
+          {languages.bg}
+        </div>
       </div>
     </div>
   );

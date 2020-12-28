@@ -15,8 +15,6 @@ You can configure runtime variables defined in .env (.env for dev; .env.staging 
 
     REACT_APP_TERMS_AND_CONDITIONS_URL -> Terms and conditions URL
     REACT_APP_EXCHANGE_RATE_TERMS_URL -> Terms and conditions for exchange rate recalculation URL
-    REACT_APP_MAX_BGN_AMOUNT -> Maximum amount of BGN a customer can spend for BCH
-    REACT_APP_MIN_BGN_AMOUNT -> Minumum amount of BGN a customer can spend for BCH
     REACT_APP_BACKEND_URL -> URL of backend buy-bch api
 
 In order to build a new version of the app you should:

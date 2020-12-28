@@ -6,10 +6,10 @@ import English from "../../lang/en.json";
 export const Context = React.createContext();
 
 const messagesFromLocal = (locale) => {
-  return /^bg\b/.test(locale) ? Bulgarian : English;
+  return "bg" === locale ? Bulgarian : English;
 };
 
-const currentLocale = navigator.language;
+const currentLocale = /^bg\b/.test(navigator.language) ? "bg" : "en";
 
 const IntlWrapper = (props) => {
   const [locale, setLocale] = useState(currentLocale);

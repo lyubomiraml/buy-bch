@@ -35,16 +35,48 @@
   }
 }
 
-.language {
+.language-phone {
   cursor: pointer;
   opacity: 0.5;
   margin-right: calc(100vw * (180 / 1920));
   text-align: right;
   width: 175px;
+  display: none;
 
   @media screen and (max-width: 800px) {
     margin-right: 0;
     width: auto;
+    display: block;
+  }
+}
+
+.language-desktop {
+  margin-right: calc(100vw * (180 / 1920));
+  text-align: right;
+  width: 175px;
+  display: flex;
+  justify-content: flex-end;
+
+  .option {
+    cursor: pointer;
+    margin-left: 15px;
+    opacity: 0.5;
+  }
+
+  .active {
+    opacity: 0.9;
+  }
+
+  .active:after {
+    content: " ]";
+  }
+
+  .active:before {
+    content: "[ ";
+  }
+
+  @media screen and (max-width: 800px) {
+    display: none;
   }
 }
 
